@@ -1,0 +1,113 @@
+<div class="container">
+    <ngb-tabset #t="ngbTabset" type="pills">
+        <ngb-tab>
+            <ng-template ngbTabTitle><b>Key Selection</b></ng-template>
+            <ng-template ngbTabContent>
+                <br><br>
+                <form  (ngSubmit)="onSubmit(keySelectForm.value)"  #keySelectForm="ngForm">
+                    <div class="form-group">
+                    <label for="fp1"  placeholder="Enter First Prime Number">First Prime Number:</label>
+                    <input type="text" class="form-control" id="fp1" name="p" [(ngModel)]="fp1" placeholder="Enter first prime number" required>
+                    </div>
+                
+                    <div class="form-group">
+                    <label for="fp2" aria-placeholder="Enter Second Prime Number">Second Prime Number:</label>
+                    <input type="text" class="form-control" id="fp2" name="q" [(ngModel)]="fp2" placeholder="Enter second prime number" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="n">n:</label>
+                    <input type="text" disabled="true" class="form-control" id="n" name="n" [(ngModel)]="n" value="{{fp1 * fp2}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="z">z:</label>
+                        <input type="text" disabled="true" class="form-control" id="z" name="z" [(ngModel)]="z" value="{{(fp1 - 1) * (fp2 - 1)}}">
+                    </div> 
+                
+                    <div class="form-group">
+                        <label for="e">e:</label>
+                        <input type="text" class="form-control" placeholder="e<n and e and z are relatively prime" id="e" name="e" [(ngModel)]="e" required>
+                    </div> 
+                
+                    <div class="form-group">
+                    <label for="d">d:</label>
+                    <input type="text" class="form-control" placeholder="ed mod z = 1" id="d" name="d" [(ngModel)]="d" required>
+                    </div> 
+                
+                    <div class="form-group">
+                        <label for="publicKey">Your public key e,n</label>
+                        <input type="text" disabled="true" class="form-control" id="publicKey" name="publicKey"  value="{{e}}, {{fp1 * fp2}}">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="privateKey">Your private key d,n</label>
+                        <input type="text" disabled="true" class="form-control" id="privateKey" name="privateKey" value=" {{d}}, {{fp1 * fp2}}">
+                    </div> 
+                
+                    <button class="btn-primary" >Submit</button>
+                </form>
+                
+                
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab id="encyription">
+            <ng-template ngbTabTitle><b>Encyription</b></ng-template>
+            <ng-template ngbTabContent>
+                <form (ngSubmit)="encyript(encyriptForm.value)"  #encyriptForm="ngForm">
+                    
+                        <div class="form-group">
+                            <label for="publicKey">Your public key (e,n) is</label>
+                            <input type="text" disabled="true" class="form-control" id="publicKey" name="publicKey"  value="{{e}}, {{fp1 * fp2}}">
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <input type="text"  class="form-control" id="message" name="message" [(ngModel)]="message" >
+                        </div>
+                        <button class="btn-primary">Encyript</button>
+                        <br><br>
+                        <div class="form-group">
+                            <label for="ciphertextInt">Ciphertext (int)</label>
+                            <input type="text"  class="form-control" id="ciphertextInt" name="ciphertextInt" disabled="true" [value]="ciphertext_int">
+                        </div>
+
+                        <br><br>
+                        <div class="form-group">
+                            <label for="ciphertextHex">Ciphertext (hex)</label>
+                            <input type="text"  class="form-control" id="ciphertextHex" name="ciphertextHex" disabled="true" [value]="ciphertext_hex">
+                        </div>
+
+                    </form>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab  id="decyription" title="Decyription">
+            <ng-template ngbTabContent>
+                <form (ngSubmit)="decyript(decyriptForm.value)"  #decyriptForm="ngForm">
+                    
+                    <div class="form-group">
+                        <label for="publicKey">Your private key (d,n) is</label>
+                        <input type="text" disabled="true" class="form-control" id="privateKey" name="privateKey"  value="{{d}}, {{fp1 * fp2}}">
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="cipherText">Enter ciphertext</label>
+                        <input type="text"  class="form-control" id="ciphertext" name="ciphertext" [(ngModel)]="ciphertext" >
+                    </div>
+                    <button class="btn-primary">Decyript</button>
+                    <br><br>
+                    <div class="form-group">
+                        <label for="plaintextInt">Plaintext (int)</label>
+                        <input type="text"  class="form-control" id="plaintextInt" name="plaintextInt" disabled="true" [value]="plaintext_int">
+                    </div>
+
+                    <br><br>
+                    <div class="form-group">
+                        <label for="plaintext">Plaintext</label>
+                        <input type="text"  class="form-control" id="plaintext" name="plaintext" disabled="true" [value]="plaintext">
+                    </div>
+
+                </form>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>
