@@ -44,8 +44,8 @@ export class AppComponent {
     let resultInt = await this.calculate_ency(this.message);
     let resultHex = await this.DecToHex(resultInt);
 
-    this.ciphertext_int = JSON.stringify(resultInt);
-    this.ciphertext_hex = JSON.stringify(resultHex);
+    this.ciphertext_int = resultInt.toString();
+    this.ciphertext_hex = resultHex.toString().split(',').join('');
 
   }
 
@@ -60,8 +60,8 @@ export class AppComponent {
     let resultInt = await this.HexToDec(this.ciphertext_hex_decyript);
     let resultPlainText = await this.calculate_decy(resultInt);
 
-    this.plaintext_int = JSON.stringify(resultInt);
-    this.plaintext = resultPlainText.toString();
+    this.plaintext_int = resultInt.toString();
+    this.plaintext = resultPlainText.toString().split(',').join('');
   
     }
   
